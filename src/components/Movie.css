@@ -1,0 +1,12 @@
+﻿.card
+{
+    box-shadow:0 0 16px 0 gray;
+    border-radius:16px;
+    margin:20px;
+    > img
+    {
+       background:cover;
+       min-height:70%;
+       max-height:70%;
+    }
+}
