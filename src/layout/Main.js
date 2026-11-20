@@ -25,7 +25,7 @@ class Main extends React.Component
             <main>
                 {
                     this.state.movies.length == 0
-                    ? <Preloader/>
+                    ? <Preloader class="preloader" />
                     : <MovieList movies={this.state.movies} />
                 }
             </main>

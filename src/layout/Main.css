@@ -1,4 +1,16 @@
 ﻿main
 {
-    min-height:calc(100vh - 74px - 64px);
+    min-height: calc(100vh - 74px - 64px);
+}
+main:has(.lds-ring)
+{
+    display:flex;
+    align-content:center;
+    justify-content:center;
+
+    > .lds-ring
+    {
+        --scale:2;
+        margin:auto;
+    }
 }
