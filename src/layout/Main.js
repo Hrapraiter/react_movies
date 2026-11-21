@@ -4,6 +4,7 @@ import React from 'react';
 
 import Preloader from '../components/Preloader';
 import MovieList from '../components/MovieList';
+import Search from '../components/Search';
 
 class Main extends React.Component
 {
@@ -19,10 +20,17 @@ class Main extends React.Component
             .then(responce => responce.json())
             .then(data => this.setState({movies: data.Search}))
     }
+    searchMovie = (str) =>
+    {
+        fetch(`https://www.omdbapi.com/?s=${str}&apikey=431e4c78`)
+            .then(responce => responce.json())
+            .then(data => this.setState({ movies: data.Search }))
+    }
     render()
     {
         return(
             <main>
+                <Search searchMovie={this.searchMovie} />
                 {
                     this.state.movies.length == 0
                     ? <Preloader class="preloader" />
