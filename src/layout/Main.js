@@ -20,7 +20,7 @@ class Main extends React.Component
             .then(responce => responce.json())
             .then(data => this.setState({movies: data.Search}))
     }
-    searchMovie = (str) =>
+    searchMovie = (str , type=null) =>
     {
         fetch(`https://www.omdbapi.com/?s=${str}&apikey=431e4c78`)
             .then(responce => responce.json())
@@ -31,10 +31,14 @@ class Main extends React.Component
         return(
             <main>
                 <Search searchMovie={this.searchMovie} />
+
                 {
-                    this.state.movies.length == 0
-                    ? <Preloader class="preloader" />
-                    : <MovieList movies={this.state.movies} />
+
+                    this.state.movies == null ? <h1>not found</h1> :
+                        this.state.movies.length == 0
+                        ? <Preloader class="preloader" />
+                        : <MovieList movies={this.state.movies} />
+                    
                 }
             </main>
         )

@@ -2,15 +2,10 @@
 {
     min-height: calc(100vh - 74px - 64px);
 }
-main:has(.lds-ring)
+main:has(.lds-ring) > .lds-ring
 {
-    display:flex;
-    align-content:center;
-    justify-content:center;
-
-    > .lds-ring
-    {
-        --scale:2;
-        margin:auto;
-    }
+    position:absolute;
+    bottom:38vh;
+    right:calc(50vw - 80px);
+    --scale:2;
 }
