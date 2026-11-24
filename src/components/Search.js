@@ -16,6 +16,7 @@ class Search extends React.Component
         if (event.key === 'Enter')
         {
             this.props.searchMovie(this.state.search, this.state.type);
+            this.setState({ page: 1 });
         }
     }
     handlerFilter = (event) =>
@@ -41,7 +42,7 @@ class Search extends React.Component
         this.setState
         (
             ()=>({type: event.target.dataset.type}) , // updater
-            ()=>this.props.searchMovie(this.state.search , this.state.type)//callback
+            () => { this.props.searchMovie(this.state.search, this.state.type); this.setState({ page: 1 }); }//callback
         );
         
         console.log(this.state);
@@ -55,11 +56,11 @@ class Search extends React.Component
             () => this.props.searchMovie(this.state.search , this.state.type , this.state.page)
         );
     }
-    nextPage = () =>
+    nextPage = (totalPages) =>
     {
         this.setState
         (
-            () => ({ page: this.state.page + 1 }),
+            () => ({ page: this.state.page < totalPages ? this.state.page + 1 : this.state.page }),
             () => this.props.searchMovie(this.state.search , this.state.type , this.state.page)
         );
     }
@@ -73,12 +74,14 @@ class Search extends React.Component
     }
     render()
     {
-        let itemsPerPage = 10;
-        let totalPages = this.props.totalItems / itemsPerPage;
-        const lastIndex = totalPages <= 10 ? totalPages + 1 : this.state.page + itemsPerPage;
-        const firstIndex = totalPages <= 10 ? lastIndex - itemsPerPage + lastIndex + 1 : lastIndex - itemsPerPage;
+        const itemsPerPage = 10;
+        const viewRange = itemsPerPage/2;
+        const totalPages = Math.ceil(this.props.totalItems / itemsPerPage);
+        const lastIndex = totalPages <= 10 ? totalPages + 1 : this.state.page + viewRange;
+        const forceMinRange = this.state.page - viewRange - 1
+        const firstIndex = forceMinRange >= 0 ? forceMinRange : 0;
         let num = [];
-        for (let i = 0; i < totalPages; i++)
+        for (let i = 1; i <= totalPages; i++)
         {
             num.push(i);
         }
@@ -91,7 +94,7 @@ class Search extends React.Component
                         onChange={(e) => this.setState({ search: e.target.value })}
                         onKeyUp={this.handleKey}
                     />
-                    <button className="btn" onClick={() => this.props.searchMovie(this.state.search , this.state.type)}>
+                    <button className="btn" onClick={() => { this.props.searchMovie(this.state.search, this.state.type); this.setState({page:1}) }}>
                         Поиск
                     </button>
                 </div>
@@ -109,7 +112,7 @@ class Search extends React.Component
                                 (
                                     (element, index) =>
                                     (
-                                        <button className="btn"
+                                        <button className={`btn${(element == this.state.page ? ' selected-page' : '')}`}
                                             key={index}
                                             onClick={ () => this.setPage(element)}
                                         >
@@ -119,7 +122,7 @@ class Search extends React.Component
                                 )
                         }
                     </div>
-                    <button className="btn" onClick={this.nextPage}>Next</button>
+                    <button className="btn" onClick={() => this.nextPage(totalPages)}>Next</button>
                 </div>
             </div>
         )

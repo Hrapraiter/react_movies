@@ -1,6 +1,6 @@
 ﻿.search
 {
-    padding:2% 2.5%;
+    padding:2% 2.5% 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -67,6 +67,11 @@
     margin:0px 4px;
     font-size:20px;
     height:32px;
+}
+.selected-page
+{
+    background-color: #005cf5;
+    box-shadow:0px 0px 5px 1px gray;
 }
 .page-numbers > button
 {
