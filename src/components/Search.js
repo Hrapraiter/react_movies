@@ -14,7 +14,7 @@ class Search extends React.Component
     {
         if (event.key === 'Enter')
         {
-            this.props.searchMovie(this.state.search,this.state.type);
+            this.props.searchMovie(this.state.search, this.state.type);
         }
     }
     handlerFilter = (event) =>
@@ -57,7 +57,7 @@ class Search extends React.Component
                         onChange={(e) => this.setState({ search: e.target.value })}
                         onKeyUp={this.handleKey}
                     />
-                    <button onClick={() => this.props.searchMovie(this.state.search)}>
+                    <button onClick={() => this.props.searchMovie(this.state.search , this.state.type)}>
                         Поиск
                     </button>
                 </div>
