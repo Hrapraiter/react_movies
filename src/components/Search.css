@@ -1,6 +1,6 @@
 ﻿.search
 {
-    padding: 2.5%;
+    padding:2% 2.5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,20 +12,22 @@
         border: 0;
         text-align: center;
     }
-    input:focus
+
+        input:focus
+        {
+            outline: none;
+            border-bottom: solid 1px #AAA;
+        }
+
+    /*button
     {
-        outline: none;
-        border-bottom: solid 1px #AAA;
-    }
-    button
-    {
-        background-color: #005c84;
+        background-color:  #005c84;
         color: white;
         padding: 0px 16px;
-        font-size:24px;
-        border-radius:4px;
-        border:none;
-    }
+        font-size: 24px;
+        border-radius: 8px;
+        border: none;
+    }*/
 }
 .radio
 {
@@ -43,4 +45,30 @@
 {
     width:20px;
     height:20px;
+}
+.pagination
+{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    
+    > button 
+    {
+        margin:8px 32px;
+    }
+}
+.btn
+{
+    /*background-color:#006e81;*/
+    background-color: #005c84;
+    color:white;
+    border:none;
+    border-radius:8px;
+    margin:0px 4px;
+    font-size:20px;
+    height:32px;
+}
+.page-numbers > button
+{
+    width:40px;
 }

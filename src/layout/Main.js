@@ -10,7 +10,8 @@ class Main extends React.Component
 {
     state =
         {
-            movies:[]
+            movies: [],
+            count:0
         }
     componentDidMount()
     {
@@ -18,19 +19,19 @@ class Main extends React.Component
         // когда компонент смонтировался на страницу
         fetch('https://www.omdbapi.com/?s=The%20Transporter&apikey=431e4c78')
             .then(responce => responce.json())
-            .then(data => this.setState({movies: data.Search}))
+            .then(data => this.setState({ movies: data.Search, count: data.totalResults }))
     }
-    searchMovie = (str , type="all") =>
+    searchMovie = (str , type="all" , page) =>
     {
-        fetch(`https://www.omdbapi.com/?s=${str}${type !== "all" ? `&type=${type}` : ""}&apikey=431e4c78`)
+        fetch(`https://www.omdbapi.com/?s=${str}${type !== "all" ? `&type=${type}` : ""}${`&page=${page}`}&apikey=431e4c78`)
             .then(responce => responce.json())
-            .then(data => this.setState({ movies: data.Search }))
+            .then(data => this.setState({ movies: data.Search , count: data.totalResults }))
     }
     render()
     {
         return(
             <main>
-                <Search searchMovie={this.searchMovie} />
+                <Search searchMovie={this.searchMovie} totalItems={ this.state.count } />
 
                 {
 
